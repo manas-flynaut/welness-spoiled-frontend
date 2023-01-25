@@ -47,6 +47,14 @@ const navigation = () => {
       title: 'List',
       icon: AccountCogOutline,
       path: '/users'
+    },
+    {
+      sectionTitle: 'Booking Management'
+    },
+    {
+      title: 'List',
+      icon: AccountCogOutline,
+      path: '/bookings'
     }
   ]
 }

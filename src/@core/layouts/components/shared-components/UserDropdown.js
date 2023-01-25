@@ -1,5 +1,6 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
+// import React, { useState,useEffect } from "react";
 
 // ** Next Import
 import { useRouter } from 'next/router'
@@ -33,6 +34,23 @@ const BadgeContentSpan = styled('span')(({ theme }) => ({
 }))
 
 const UserDropdown = () => {
+
+  const [username, setUserName] = useState(null)
+
+  useEffect(() => {
+    var userInfo = localStorage.getItem("userInfo");
+    let user = JSON.parse(userInfo)
+    if(user){
+      setUserName(user.data.name)
+      console.log("userinfo",user.data)
+    }
+    // if(!user){
+    //   router.push(`/login`);
+    // return;
+    // }else{
+    //   router.push(`/`);
+    // }
+}, []);
   // ** States
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -45,6 +63,14 @@ const UserDropdown = () => {
 
   const handleDropdownClose = url => {
     if (url) {
+      router.push(url)
+    }
+    setAnchorEl(null)
+  }
+
+  const logout = url => {
+    if (url) {
+      localStorage.clear();
       router.push(url)
     }
     setAnchorEl(null)
@@ -98,7 +124,7 @@ const UserDropdown = () => {
               <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', marginLeft: 3, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 600 }}>John Doe</Typography>
+              <Typography sx={{ fontWeight: 600 }}>{username}</Typography>
               <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }}>
                 Admin
               </Typography>
@@ -144,7 +170,7 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ py: 2 }} onClick={() => handleDropdownClose('/pages/login')}>
+        <MenuItem sx={{ py: 2 }} onClick={() => logout('/login')}>
           <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />
           Logout
         </MenuItem>

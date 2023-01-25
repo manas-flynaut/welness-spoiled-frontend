@@ -1,4 +1,9 @@
 // ** MUI Imports
+import React, { useState,useEffect } from "react";
+
+// ** Next Imports
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Grid from '@mui/material/Grid'
 
 // ** Icons Imports
@@ -23,6 +28,20 @@ import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
 import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 
 const Dashboard = () => {
+
+  const router = useRouter()
+
+  useEffect(() => {
+      var userInfo = localStorage.getItem("userInfo");
+      let user = JSON.parse(userInfo)
+      // console.log("userinfo",user.token)
+      if(!user){
+        router.push(`/login`);
+      return;
+      }else{
+        router.push(`/`);
+      }
+  }, []);
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>

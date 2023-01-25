@@ -1,9 +1,10 @@
 // ** React Imports
-import { useState } from 'react'
+import React, { useState,useEffect } from "react";
 
 // ** Next Imports
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
 
 // ** MUI Components
 import Box from '@mui/material/Box'
@@ -21,6 +22,13 @@ import { styled, useTheme } from '@mui/material/styles'
 import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
+
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
+import Fade from "@mui/material/Fade";
+
+import axios from "axios"
 
 // ** Icons Imports
 import Google from 'mdi-material-ui/Google'
@@ -59,6 +67,9 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 
 const LoginPage = () => {
   // ** State
+  const [checkLogin, setCheckLogin] = useState(false)
+  const [alertVisibility, setAlertVisibility] = useState(false);
+  const [email, setEmail] = useState("");
   const [values, setValues] = useState({
     password: '',
     showPassword: false
@@ -78,6 +89,29 @@ const LoginPage = () => {
 
   const handleMouseDownPassword = event => {
     event.preventDefault()
+  }
+
+  async function login(){
+    if(email == '' || values.password == ''){
+      setCheckLogin(true)
+      return;
+    }
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    let body = {"userName":email,"password":values.password}
+    console.log(body)
+    let responce = await axios.post(`http://localhost:8002/api/v1/login`,body, {
+      headers: headers
+    })
+    if(responce.data.data){
+      console.log("datalength",responce.data)
+      localStorage.setItem('userInfo', JSON.stringify(responce.data));
+      router.push('/')
+    }else{
+      setCheckLogin(true)
+    }
+  
   }
 
   return (
@@ -164,7 +198,7 @@ const LoginPage = () => {
             <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
+            <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} onChange={(e) => setEmail(e.target.value)}/>
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
@@ -191,20 +225,20 @@ const LoginPage = () => {
               sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
             >
               <FormControlLabel control={<Checkbox />} label='Remember Me' />
-              <Link passHref href='/'>
+              {/* <Link passHref href='/'>
                 <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
-              </Link>
+              </Link> */}
             </Box>
             <Button
               fullWidth
               size='large'
               variant='contained'
               sx={{ marginBottom: 7 }}
-              onClick={() => router.push('/')}
+              onClick={() => login()}
             >
               Login
             </Button>
-            <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+            {/* <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
               <Typography variant='body2' sx={{ marginRight: 2 }}>
                 New on our platform?
               </Typography>
@@ -213,9 +247,9 @@ const LoginPage = () => {
                   <LinkStyled>Create an account</LinkStyled>
                 </Link>
               </Typography>
-            </Box>
-            <Divider sx={{ my: 5 }}>or</Divider>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            </Box> */}
+            {/* <Divider sx={{ my: 5 }}>or</Divider> */}
+            {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Link href='/' passHref>
                 <IconButton component='a' onClick={e => e.preventDefault()}>
                   <Facebook sx={{ color: '#497ce2' }} />
@@ -238,8 +272,30 @@ const LoginPage = () => {
                   <Google sx={{ color: '#db4437' }} />
                 </IconButton>
               </Link>
-            </Box>
+            </Box> */}
           </form>
+          {checkLogin &&
+      <>
+        <Stack sx={{ width: '100%' }} spacing={2}>
+      <Alert variant="filled" severity="error">
+        <AlertTitle>Error</AlertTitle>
+        This is an error alert — <strong>check it out!</strong>
+      </Alert>
+      {/* <Alert severity="warning">
+        <AlertTitle>Warning</AlertTitle>
+        This is a warning alert — <strong>check it out!</strong>
+      </Alert>
+      <Alert severity="info">
+        <AlertTitle>Info</AlertTitle>
+        This is an info alert — <strong>check it out!</strong>
+      </Alert>
+      <Alert severity="success">
+        <AlertTitle>Success</AlertTitle>
+        This is a success alert — <strong>check it out!</strong>
+      </Alert> */}
+    </Stack>
+      </>
+      }
         </CardContent>
       </Card>
       <FooterIllustrationsV1 />

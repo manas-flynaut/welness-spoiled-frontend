@@ -25,37 +25,30 @@ import axios from "axios"
     // }else{
     //     navigateTo(`/dashboard`);
     // }
-    // getStructureData();
+    getRolesData();
 }, []);
 
-async function getStructureData(){
-  var token = "2001|mByUYNoGv6bue6cJrvKPp6CwVr8EU8FPb0F7S5dp"
+async function getRolesData(){
   const headers = {
-    'Authorization': 'Bearer 2001|mByUYNoGv6bue6cJrvKPp6CwVr8EU8FPb0F7S5dp'
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2NlYjZmYTJhNjg3NmYwYjZiNDI0MDUiLCJleHAiOjE2OTAxMzA2MzEuMzg0LCJpYXQiOjE2NzQ0OTIyMzF9.my7w-04sADjlvbX0QrED7imXfa4BCLzgxxlJObobfeE'
   }
-  let responce = await axios.get(`http://localhost:8000/api/structure_list`,{
+  let responce = await axios.get(`http://localhost:8002/api/v1/role/get-all`,{
     headers: headers
   })
-  
-  // let responce = await axios.post(`http://localhost:8000/api/login`,{
-  //   email: 'amit@gmail.com',
-  //   password: '12345',
-  //   device_token:'1',
-  //   device_type:'1'
-  // })
-  if(responce.data.status == 200){
+
+  if(responce){
     console.log("datalength",responce.data.data)
     setStructureData(responce.data.data)
   }
-  
-  }
+
+}
 
   const statusObj = {
-    0: { color: 'info' },
-    3: { color: 'error' },
-    1: { color: 'primary' },
-    4: { color: 'warning' },
-    2: { color: 'success' }
+    true: { color: 'success' },
+    false: { color: 'error' },
+    // 1: { color: 'primary' },
+    // 4: { color: 'warning' },
+    // 2: { color: 'success' }
   }
     return (
       <Card>
@@ -66,26 +59,19 @@ async function getStructureData(){
                 <TableCell>Role Name</TableCell>
                 <TableCell>Role Description</TableCell>
                 <TableCell>Status</TableCell>
-                <TableCell>Action</TableCell>
+                {/* <TableCell>Action</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
-          {/* {structureData.map(row => (
+          {structureData.map(row => (
             <TableRow hover key={row.id} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
-          <TableCell><img
-              src={row.channel_image}
-              width={60}
-              alt='Player'
-            /></TableCell>
-          <TableCell>{row.channel_name}</TableCell>
-          <TableCell>{row.category_name}</TableCell>
-          <TableCell>{row.organization_url}</TableCell>
-          <TableCell>{row.total_subscribers}</TableCell>
-          <TableCell>{row.objective}</TableCell>
+          <TableCell>{row.name}</TableCell>
+          <TableCell>{row.description}</TableCell>
+          {/* <TableCell>{row.status}</TableCell> */}
                 <TableCell>
                 <Chip
-                    label={row.is_active}
-                    color={statusObj[1].color}
+                    label={row.status == true ? "Active" : "Deactivated"}
+                    color={statusObj[row.status].color}
                     sx={{
                       height: 24,
                       fontSize: '0.75rem',
@@ -95,7 +81,7 @@ async function getStructureData(){
                   />
                   </TableCell>
                   </TableRow>
-                  ))} */}
+                  ))}
                   
           </TableBody>
         </Table>

@@ -54,7 +54,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     //     navigateTo(`/dashboard`);
     // }
     getUsersData();
-}, []);
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -99,8 +99,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     console.log(channelID)
     // setAnchorEl(null);
     // setmodalOpen(true);
+    var userInfo = localStorage.getItem("userInfo");
+    let user = JSON.parse(userInfo)
     const headers = {
-      'Authorization': 'Bearer 2001|mByUYNoGv6bue6cJrvKPp6CwVr8EU8FPb0F7S5dp'
+      'Authorization': `Bearer ${user.token}`
     }
     let res = await axios.get(`http://127.0.0.1:8000/api/update_status?channel_id=${channelID}`,{
       headers: headers
@@ -136,10 +138,21 @@ const Transition = React.forwardRef(function Transition(props, ref) {
           {structureData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
               return (
             <TableRow hover key={row.id} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
-            <TableCell><img
+            <TableCell>
+              <img
               src="https://picsum.photos/id/870/200/300?grayscale&blur=2"
-              width={50}
+              width={40}
               alt='Player'
+              style={{
+                borderWidth:1,
+                borderColor:'rgba(0,0,0,0.2)',
+                alignItems:'center',
+                justifyContent:'center',
+                width:60,
+                height:60,
+                backgroundColor:'#fff',
+                borderRadius:50,
+              }}
             />
             </TableCell>
           <TableCell>{row.name}</TableCell>

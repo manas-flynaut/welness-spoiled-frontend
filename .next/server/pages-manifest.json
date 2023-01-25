@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/401": "pages/401.html",
-  "/_error": "pages/_error.js",
   "/404": "pages/404.html",
   "/500": "pages/500.html",
   "/account-settings": "pages/account-settings.html",
@@ -16,5 +15,7 @@
   "/tables": "pages/tables.html",
   "/typography": "pages/typography.html",
   "/users/add": "pages/users/add.html",
-  "/users": "pages/users.html"
+  "/users/edit": "pages/users/edit.html",
+  "/users": "pages/users.html",
+  "/_error": "pages/_error.js"
 }

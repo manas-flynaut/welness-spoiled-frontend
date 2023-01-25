@@ -27,14 +27,18 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
-import { Router } from "next/router";
 import axios from "axios"
+
+// ** Next Imports
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
  const Users = () => {
+  const router = useRouter()
   const [page, setPage] = useState(0)
   const [channelID, setChannel] = useState(null)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -93,6 +97,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
       setStructureData(responce.data.data)
     }
   
+  }
+
+  const editDetails = async () => {
+    router.push(`/users/edit`)
   }
 
   const handleAction = async () => {
@@ -194,7 +202,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
                   }}
                 >
                   <MenuItem onClick={()=>changeStatus()}>{row.blocked == true ? "Resume" : "Suspend"}</MenuItem>
-                  <MenuItem onClick={handleClose}>Edit</MenuItem>
+                  <MenuItem onClick={editDetails}>Edit</MenuItem>
                   <MenuItem onClick={changeStatus}>Delete</MenuItem>
                 </Menu>
                   </TableCell>

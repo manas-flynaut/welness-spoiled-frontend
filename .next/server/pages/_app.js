@@ -818,8 +818,8 @@ const FooterContent = ()=>{
                     ` by `,
                     /*#__PURE__*/ jsx_runtime_.jsx((Link_default()), {
                         target: "_blank",
-                        href: "https://themeselection.com/",
-                        children: "ThemeSelection"
+                        href: "https://flynaut.com/",
+                        children: "Flynaut"
                     })
                 ]
             }),
@@ -835,22 +835,22 @@ const FooterContent = ()=>{
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx((Link_default()), {
                         target: "_blank",
-                        href: "https://github.com/themeselection/materio-mui-react-nextjs-admin-template-free/blob/main/LICENSE",
-                        children: "MIT License"
+                        href: "https://flynaut.com/",
+                        children: "License"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx((Link_default()), {
                         target: "_blank",
-                        href: "https://themeselection.com/",
+                        href: "https://flynaut.com/",
                         children: "More Themes"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx((Link_default()), {
                         target: "_blank",
-                        href: "https://github.com/themeselection/materio-mui-react-nextjs-admin-template-free/blob/main/README.md",
+                        href: "https://flynaut.com/",
                         children: "Documentation"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx((Link_default()), {
                         target: "_blank",
-                        href: "https://github.com/themeselection/materio-mui-react-nextjs-admin-template-free/issues",
+                        href: "https://flynaut.com/",
                         children: "Support"
                     })
                 ]

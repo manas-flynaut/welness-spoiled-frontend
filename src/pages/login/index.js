@@ -101,7 +101,7 @@ const LoginPage = () => {
     }
     let body = {"userName":email,"password":values.password}
     console.log(body)
-    let responce = await axios.post(`http://localhost:8002/api/v1/login`,body, {
+    let responce = await axios.post(`http://159.89.165.89:8002/api/v1/login`,body, {
       headers: headers
     })
     if(responce.data.data){

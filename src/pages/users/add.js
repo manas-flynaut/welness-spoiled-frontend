@@ -64,7 +64,7 @@ const addUser = () => {
       const { email, password, password2, firstname, lastname, role, phone_number } = values;
       let body = {"email":email,"password":password,"phone":phone_number,"name":firstname+''+lastname,"otp":"1234"}
       console.log("bbbody",body)
-      let res = await axios.post('http://localhost:8002/api/v1/signup',body, {
+      let res = await axios.post('http://159.89.165.89:8002/api/v1/signup',body, {
         headers: headers
       })
       console.log("ressss",res.data)

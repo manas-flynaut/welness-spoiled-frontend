@@ -1,4 +1,4 @@
-/.next
+#/.next
 /jsconfig.json
 /next-env.d.ts
 /next.config.js

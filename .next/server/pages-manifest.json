@@ -1,0 +1,20 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/401": "pages/401.html",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.html",
+  "/500": "pages/500.html",
+  "/account-settings": "pages/account-settings.html",
+  "/bookings": "pages/bookings.html",
+  "/": "pages/index.html",
+  "/login": "pages/login.html",
+  "/pages/error": "pages/pages/error.html",
+  "/pages/register": "pages/pages/register.html",
+  "/roles/add": "pages/roles/add.html",
+  "/roles": "pages/roles.html",
+  "/tables": "pages/tables.html",
+  "/typography": "pages/typography.html",
+  "/users/add": "pages/users/add.html",
+  "/users": "pages/users.html"
+}

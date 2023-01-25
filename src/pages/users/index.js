@@ -84,7 +84,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     const headers = {
       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2NlYjZmYTJhNjg3NmYwYjZiNDI0MDUiLCJleHAiOjE2OTAxMzA2MzEuMzg0LCJpYXQiOjE2NzQ0OTIyMzF9.my7w-04sADjlvbX0QrED7imXfa4BCLzgxxlJObobfeE'
     }
-    let responce = await axios.get(`http://localhost:8002/api/v1/user/get-all`,{
+    let responce = await axios.get(`http://159.89.165.89:8002/api/v1/user/get-all`,{
       headers: headers
     })
 

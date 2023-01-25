@@ -41,7 +41,7 @@ const addRole = () => {
     const { name, description } = values;
     let body = {"name":name,"description":description}
     console.log("bbbody",body)
-    let res = await axios.post('http://localhost:8002/api/v1/role/add',body, {
+    let res = await axios.post('http://159.89.165.89:8002/api/v1/role/add',body, {
       headers: headers
     })
     console.log("ressss",res.data)
